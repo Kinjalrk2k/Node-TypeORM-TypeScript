@@ -45,3 +45,15 @@ export class User extends BaseEntity {
 
 - `npm run typeorm schema:drop` - Drops all the tables
 - `npm run typeorm schema:sync` - Syncs the tables with the database
+
+## Listeners
+
+- Hooks in TypeORM
+  > Any of your entities can have methods with custom logic that listen to specific entity events. You must mark those methods with special decorators depending on what event you want to listen to.
+
+```ts
+@BeforeInsert()
+  createUuid() {
+    this.uuid = uuid();
+  }
+```
