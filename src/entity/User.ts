@@ -21,9 +21,9 @@ export class User extends BaseEntity {
   @Column()
   role: string;
 
-  @CreateDateColumn("created_at")
+  @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
 
-  @UpdateDateColumn("updated_at")
+  @UpdateDateColumn({ name: "updated_at" })
   updatedAt: Date;
 }
