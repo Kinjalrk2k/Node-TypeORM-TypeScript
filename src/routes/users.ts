@@ -31,6 +31,8 @@ router.get("/:uuid", async (req: Request, res: Response) => {
 // Find all users
 router.get("/", async (req: Request, res: Response) => {
   try {
+    const users = await User.find();
+    return res.json(users);
   } catch (error) {
     console.log(error);
     return res.status(500).json({ err: "Something went wrong" });
