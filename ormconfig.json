@@ -2,7 +2,7 @@
   "type": "postgres",
   "host": "localhost",
   "port": 5432,
-  "username": "postgress",
+  "username": "postgres",
   "password": "password",
   "database": "typeorm_tutorial",
   "synchronize": true,
