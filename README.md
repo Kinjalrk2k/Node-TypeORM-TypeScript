@@ -162,3 +162,24 @@ npm run typeorm migration:show
 [ ] createSchema1624865222248 // pending migration
 [X] createSchema1624865222248 // completed migration
 ```
+
+## Deploying to Production
+
+- We shouldn't be running typescript in production. We must build a javascript server instead
+- We should also let the orm know where to find the javascript entities
+- _./ormconfig_:
+
+```json
+{
+  .
+  .
+  "entities": ["src/entity/**/*.ts", "./entity/**/*.js"],
+  "migrations": ["src/migration/**/*.ts", "./migration/**/*.js"],
+  "subscribers": ["src/subscriber/**/*.ts", "./subscriber/**/*.js"],
+  .
+  .
+}
+```
+
+- Add script: `"build": "tsc"`
+- Build: `npm run build`
