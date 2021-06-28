@@ -45,11 +45,18 @@ router.put("/:uuid", async (req: Request, res: Response) => {
   const { uuid } = req.params;
 
   try {
+    const user = await User.findOneOrFail({ uuid });
+
+    user.name = name || user.name;
+    user.email = email || user.email;
+    user.role = role || user.role;
+
+    await user.save();
+
+    return res.json(user);
   } catch (error) {
     console.log(error);
-    return res
-      .status(404)
-      .json({ msg: error.message.replace(/(\r\n|\n|\r)/gm, "") });
+    return res.status(500).json(error);
   }
 });
 
