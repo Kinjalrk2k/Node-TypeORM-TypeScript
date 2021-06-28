@@ -2,8 +2,6 @@ import "reflect-metadata";
 import { createConnection } from "typeorm";
 import express from "express";
 
-import { User } from "./entity/User";
-
 import usersRoutes from "./routes/users";
 import postsRoutes from "./routes/posts";
 
