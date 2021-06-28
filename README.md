@@ -1,5 +1,9 @@
 # Node TypeORM TypeScript
 
+- Learning TypeORM with PostgreSQL in NodeJS backend
+- Tutorial by: Ahmed Hadjou (Classsed)
+  - [TypeORM Tutorial (Seamless Typescript ORM)](https://www.youtube.com/watch?v=Paz0gnODPE0)
+
 ## Bootstrapping
 
 - Install typeorm globally: `npm i -g typeorm` (Or we can use `npx` later)
@@ -45,6 +49,7 @@ export class User extends BaseEntity {
 
 - `npm run typeorm schema:drop` - Drops all the tables
 - `npm run typeorm schema:sync` - Syncs the tables with the database
+  > Read the [docs](https://typeorm.io/#/using-cli)
 
 ## Listeners
 
@@ -123,4 +128,37 @@ user: User;
 // in USERS - one user can have many posts
 @OneToMany(() => Post, (post) => post.user /*the inverse function*/)
 posts: Post[]; // returning a list of posts
+```
+
+## Migrations
+
+- We shouldn't be using `sync` in production, as it's **"DANGEROUS"**. Set it to `false`!
+- To generate a migration: (this just creates the migration file, doesn't run it itself)
+
+```bash
+npm run typeorm migration:generate -- -n <name>
+```
+
+> Note: `--` is used to forward arguments to a script
+
+- To run the migration:
+
+```bash
+npm run typeorm migration:run
+```
+
+- If we re-run the migration, it wont run actually. This is because it keeps track of the already run migrations. It only runs the pending migrations
+- To revert a migration (`down` it):
+
+```bash
+npm run typeorm migration:revert
+```
+
+- To view the status of migrations:
+
+```bash
+npm run typeorm migration:show
+
+[ ] createSchema1624865222248 // pending migration
+[X] createSchema1624865222248 // completed migration
 ```
