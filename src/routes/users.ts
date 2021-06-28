@@ -65,6 +65,11 @@ router.delete("/:uuid", async (req: Request, res: Response) => {
   const { uuid } = req.params;
 
   try {
+    const user = await User.findOneOrFail({ uuid });
+
+    await user.remove();
+
+    return res.status(204).json({ msg: "User deleted successfully!" });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ err: "Something went wrong" });
