@@ -1,3 +1,4 @@
+import { validate } from "class-validator";
 import express, { Request, Response } from "express";
 import { User } from "../entity/User";
 
@@ -9,6 +10,10 @@ router.post("/", async (req: Request, res: Response) => {
 
   try {
     const user = User.create({ name, email, role });
+
+    const errors = await validate(user);
+    if (errors.length > 0) throw errors;
+
     await user.save();
 
     return res.status(201).json(user);
@@ -22,7 +27,7 @@ router.post("/", async (req: Request, res: Response) => {
 router.get("/:uuid", async (req: Request, res: Response) => {
   const { uuid } = req.params;
   try {
-    const user = await User.findOneOrFail({ uuid });
+    const user = await User.findOneOrFail({ uuid }, { relations: ["posts"] });
 
     return res.json(user);
   } catch (error) {

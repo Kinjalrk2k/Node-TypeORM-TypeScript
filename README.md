@@ -97,6 +97,18 @@ const post = new Post({ title, body });
 
 ```
 
+## Enums
+
+- Unlike prisma, we can define `enum` directly in a column decorator
+
+```ts
+@Column({
+  type: "enum",
+  enum: ["user", "admin", "superadmin"],
+  default: "user",
+})
+```
+
 ## Relations
 
 > Read the [docs](https://typeorm.io/#/relations)
