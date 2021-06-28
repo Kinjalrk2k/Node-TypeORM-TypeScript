@@ -21,6 +21,8 @@ router.post("/", async (req: Request, res: Response) => {
 
 router.get("/", async (req: Request, res: Response) => {
   try {
+    const posts = await Post.find({ relations: ["user"] });
+    return res.json(posts);
   } catch (error) {
     console.log(error);
     return res.status(500).json(error);
