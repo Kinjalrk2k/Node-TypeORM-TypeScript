@@ -22,9 +22,12 @@ router.post("/", async (req: Request, res: Response) => {
 router.get("/:uuid", async (req: Request, res: Response) => {
   const { uuid } = req.params;
   try {
+    const user = await User.findOneOrFail({ uuid });
+
+    return res.json(user);
   } catch (error) {
     console.log(error);
-    return res.status(404).json({ err: error.message });
+    return res.status(404).json(error);
   }
 });
 
