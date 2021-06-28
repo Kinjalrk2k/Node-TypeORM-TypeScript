@@ -96,3 +96,19 @@ constructor({ title, body }: { title: string; body: string }) {
 const post = new Post({ title, body });
 
 ```
+
+## Relations
+
+> Read the [docs](https://typeorm.io/#/relations)
+
+- Establishing a many-to-one relationship and inverse one-to-many relationship
+
+```ts
+// in POSTS -  many posts can belong to one user
+@ManyToOne(() => User)
+user: User;
+
+// in USERS - one user can have many posts
+@OneToMany(() => Post, (post) => post.user /*the inverse function*/)
+posts: Post[]; // returning a list of posts
+```
