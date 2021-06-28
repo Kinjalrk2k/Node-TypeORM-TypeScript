@@ -183,3 +183,56 @@ npm run typeorm migration:show
 
 - Add script: `"build": "tsc"`
 - Build: `npm run build`
+
+## Sample Queries
+
+- Create a new record
+
+```ts
+const user = User.create({ name, email, role });
+await user.save();
+
+// when using the constructor syntax
+const post = new Post({ title, body, user });
+await post.save();
+```
+
+- Find query
+
+```ts
+// find one
+const user = await User.findOneOrFail({ uuid: userUuid });
+
+// find and populate a field
+const user = await User.findOneOrFail({ uuid }, { relations: ["posts"] });
+
+// find with a query
+const users = await User.find({ ...query });
+```
+
+- Update query
+
+```ts
+const user = await User.findOneOrFail({ uuid });
+
+user.name = name || user.name;
+user.email = email || user.email;
+user.role = role || user.role;
+
+await user.save();
+```
+
+- Delete query
+
+```ts
+const user = await User.findOneOrFail({ uuid });
+await user.remove();
+```
+
+- Build relations
+
+```ts
+const user = await User.findOneOrFail({ uuid: userUuid });
+const post = new Post({ title, body, user });
+await post.save();
+```
