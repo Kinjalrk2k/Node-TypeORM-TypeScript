@@ -36,4 +36,8 @@ export class User extends BaseEntity {
   createUuid() {
     this.uuid = uuid();
   }
+
+  toJSON() {
+    return { ...this, id: undefined };
+  }
 }

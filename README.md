@@ -57,3 +57,11 @@ export class User extends BaseEntity {
     this.uuid = uuid();
   }
 ```
+
+- We can also override some of the default class methods. The following code removes the `id` field from all the responses from database
+
+```ts
+toJSON() {
+  return { ...this, id: undefined };
+}
+```
