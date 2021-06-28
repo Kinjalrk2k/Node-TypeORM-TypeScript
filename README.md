@@ -65,3 +65,34 @@ toJSON() {
   return { ...this, id: undefined };
 }
 ```
+
+## Abstract Models
+
+- Different models might have some common fields/functionalities. We can refractor them by using an abstract class and then extending the same to our models
+
+```ts
+export default abstract class Model extends BaseEntity {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  .
+  .
+  .
+}
+```
+
+## Constructor syntax in Models
+
+- We can provide our own constructor in the models and use the constructor syntax to create a record
+
+```ts
+// inside the model class
+constructor({ title, body }: { title: string; body: string }) {
+  super();
+  Object.assign(this, { title, body });
+}
+
+// creating a new record
+const post = new Post({ title, body });
+
+```

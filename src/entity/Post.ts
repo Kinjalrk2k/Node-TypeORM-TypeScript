@@ -8,4 +8,9 @@ export class Post extends Model {
 
   @Column()
   body: string;
+
+  constructor({ title, body }: { title: string; body: string }) {
+    super();
+    Object.assign(this, { title, body });
+  }
 }
