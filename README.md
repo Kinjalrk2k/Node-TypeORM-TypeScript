@@ -101,7 +101,7 @@ const post = new Post({ title, body });
 
 > Read the [docs](https://typeorm.io/#/relations)
 
-- Establishing a many-to-one relationship and inverse one-to-many relationship
+- Establishing a many-to-one relationship and inverse one-to-many relationship (or vice versa)
 
 ```ts
 // in POSTS -  many posts can belong to one user

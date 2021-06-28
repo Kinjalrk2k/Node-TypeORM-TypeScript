@@ -7,9 +7,12 @@ const router = express.Router();
 router.post("/", async (req: Request, res: Response) => {
   const { title, body, userUuid } = req.body;
   try {
-    const user = User.findOneOrFail({ uuid: userUuid });
+    const user = await User.findOneOrFail({ uuid: userUuid });
 
-    const post = new Post({ title, body });
+    const post = new Post({ title, body, user });
+    await post.save();
+
+    return res.json(post);
   } catch (error) {
     console.log(error);
     return res.status(500).json(error);
